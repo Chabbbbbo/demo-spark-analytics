@@ -29,19 +29,19 @@
 > export JAVA_HOME=$(alternatives --display java | grep '현재 /'| sed "s/현재 //" | sed 's|/bin/java로 링크되어 있습니다||')
 
 ### 영문인 경우
-> alternatives --display java | grep current | sed 's/link currently points to //' | sed 's|/bin/java||' | sed 's/^ //g'
+> alternatives --display java | grep current | sed 's/link currently points to //' | sed 's|/bin/java||' | sed 's/^ //g' # 자바 위치 할당
 > export JAVA_HOME=$(alternatives --display java | grep current | sed 's/link currently points to //' | sed 's|/bin/java||' | sed 's/^ //g')
 
 # 제대로 java 경로가 설정되었는지 확인
 > echo $JAVA_HOME
-> echo "export JAVA_HOME=$JAVA_HOME" >> ~/.bash_profile
-> source ~/.bash_profile
+> echo "export JAVA_HOME=$JAVA_HOME" >> ~/.bash_profile # bash_profile에 자바홈 설정
+> source ~/.bash_profile # 파일 갱신 명령
 ```
 
 ### Download git project
 ```
 > cd ~
-> sudo yum install -y wget git
+> sudo yum install -y wget git # 웹파일 다운받을 수 있는 파일 다운
 > git clone https://github.com/freepsw/demo-spark-analytics.git
 > cd demo-spark-analytics
 > mkdir sw
@@ -122,6 +122,7 @@ ERROR: Elasticsearch did not exit normally - check the logs at /home/freepsw/app
 root hard nofile 70000
 root soft nofile 70000
 
+# 시스템 관련 내용이라 변경되었지만, 현재 세션에서 적용이 안된 것 처럼 보임
 # 적용을 위해 콘솔을 닫고 다시 연결한다. (console 재접속)
 # 적용되었는지 확인
 > ulimit -a
@@ -154,7 +155,7 @@ open files                      (-n) 70000  #--> 정상적으로 적용됨을 �
 # 아래 내용 추가
 vm.max_map_count = 262144
 
-# 1-3) 또는 아래 명령어 실행 
+# 1-3) 또는 아래 명령어 실행 (이게 제일 쉬운 방법)
 > echo vm.max_map_count=262144 | sudo tee -a /etc/sysctl.conf
 
 
